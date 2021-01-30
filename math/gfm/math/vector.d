@@ -56,6 +56,8 @@ struct Vector(T, ubyte N)
         alias ElementType = T;
         enum ubyte elementCount = N;
 
+        enum Vector zero = Vector(cast(ubyte)0);
+
         /// Construct a Vector with a `T[]` or the values as arguments
         @nogc this(Args...)(Args args) pure nothrow
         {

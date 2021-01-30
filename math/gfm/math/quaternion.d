@@ -224,6 +224,8 @@ struct Quaternion(T)
             return cast(U)(m3);
         }
 
+        enum Quaternion zero = Quaternion(0, 0, 0, 0);
+
         /// Workaround Vector not being constructable through CTFE
         @nogc static Quaternion identity() pure nothrow @property
         {

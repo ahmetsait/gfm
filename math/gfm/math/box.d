@@ -23,6 +23,8 @@ struct Box(T, int N)
         bound_t min; // not enforced, the box can have negative volume
         bound_t max;
 
+        enum Box zero = Box(bound_t.zero, bound_t.zero);
+
         /// Construct a box which extends between 2 points.
         /// Boundaries: min is inside the box, max is just outside.
         @nogc this(bound_t min_, bound_t max_) pure nothrow

@@ -38,6 +38,8 @@ struct Matrix(T, int R, int C)
             T[C][R] c;       // components
         }
 
+        enum Matrix zero = Matrix(cast(ubyte)0);
+
         @nogc this(U...)(U values) pure nothrow
         {
             static if ((U.length == C*R) && allSatisfy!(isTAssignable, U))
