@@ -855,10 +855,20 @@ alias vec4!double vec4d;  ///
 /// Element-wise maximum.
 @nogc Vector!(T, N) maxByElem(T, int N)(const Vector!(T, N) a, const Vector!(T, N) b) pure nothrow
 {
-    import std.algorithm: max;
+    import std.algorithm : max;
     Vector!(T, N) result = void;
     foreach (i; 0 .. N)
         result.v[i] = max(a.v[i], b.v[i]);
+    return result;
+}
+
+/// Element-wise clamp.
+@nogc Vector!(T, N) clampByElem(T, ubyte N)(const Vector!(T, N) v, const Vector!(T, N) a, const Vector!(T, N) b) pure nothrow
+{
+    import std.algorithm : clamp;
+    Vector!(T, N) result = void;
+    foreach (i; 0 .. N)
+        result.v[i] = clamp(v.v[i], a.v[i], b.v[i]);
     return result;
 }
 
@@ -869,6 +879,13 @@ alias vec4!double vec4d;  ///
     foreach (i; 0 .. N)
         result.v[i] = abs(a.v[i]);
     return result;
+}
+
+unittest
+{
+    assert(minByElem(vec3i(5, 3, 1), vec3i(1, 3, 5)) == [1, 3, 1]);
+    assert(maxByElem(vec3i(5, 3, 1), vec3i(1, 3, 5)) == [5, 3, 5]);
+    assert(clampByElem(vec3i(5, 3, 1), vec3i(1, 3, 5), vec3i(2, 4, 6)) == [2, 3, 5]);
 }
 
 /// Dot product of two vectors
